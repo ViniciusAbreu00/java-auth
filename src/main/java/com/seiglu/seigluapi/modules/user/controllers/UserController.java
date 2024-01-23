@@ -1,22 +1,16 @@
 package com.seiglu.seigluapi.modules.user.controllers;
 
-import com.seiglu.seigluapi.exceptions.UserFoundException;
 import com.seiglu.seigluapi.modules.user.UserEntity;
-import com.seiglu.seigluapi.modules.user.UserRepository;
 import com.seiglu.seigluapi.modules.user.dto.UserAuthDTO;
-import com.seiglu.seigluapi.modules.user.useCase.UserAuthUseCade;
+import com.seiglu.seigluapi.modules.user.useCase.UserAuthUseCase;
 import com.seiglu.seigluapi.modules.user.useCase.UserUseCase;
 import jakarta.validation.Valid;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.AuthenticationException;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
@@ -25,7 +19,7 @@ public class UserController {
     @Autowired
     private UserUseCase userUseCase;
     @Autowired
-    private UserAuthUseCade userAuthUseCade;
+    private UserAuthUseCase userAuthUseCade;
     @PostMapping("")
     public ResponseEntity<Object> createUser(@Valid @RequestBody UserEntity userEntity ) {
         try {

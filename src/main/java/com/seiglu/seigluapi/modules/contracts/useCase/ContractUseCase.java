@@ -10,7 +10,8 @@ public class ContractUseCase {
     @Autowired
     ContractRepository contractRepository;
 
-    public ContractEntity createContract(ContractEntity contract) {
+    public ContractEntity createContract(ContractEntity contract)
+    {
         return contractRepository.save(contract);
     }
 

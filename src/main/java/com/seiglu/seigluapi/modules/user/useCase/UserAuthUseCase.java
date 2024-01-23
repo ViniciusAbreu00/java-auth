@@ -10,9 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
+import java.time.Duration;
+import java.time.Instant;
 
 @Service
-public class UserAuthUseCade {
+public class UserAuthUseCase {
     @Value("${security.token.secret}")
     private String secretKey;
     @Autowired
@@ -32,7 +34,10 @@ public class UserAuthUseCade {
         }
 
         Algorithm algorithm = Algorithm.HMAC256(secretKey);
-        return JWT.create().withIssuer("seiglu").withSubject(findUser.get().getId().toString()).sign(algorithm);
+        return JWT.create().withIssuer("seiglu")
+                .withExpiresAt(Instant.now().plus(Duration.ofHours(2)))
+                .withSubject(findUser.get().getId().toString())
+                .sign(algorithm);
     }
 
 }
